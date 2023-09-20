@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <?php 
+    <?php
         $array = array(
             'mesa' => 'mesa de madera',
             'casa' => 'lujosa',
