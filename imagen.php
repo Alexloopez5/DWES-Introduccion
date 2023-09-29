@@ -12,4 +12,4 @@
         http_response_code(404);
         imagepng(imagecreatefrompng("/home/alumno/DWES/Imagenes/prohibido.png"));
     }
-?>
+?> 
