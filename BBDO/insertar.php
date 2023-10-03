@@ -11,5 +11,5 @@
     $pdoSt-> bindParam(2,$NumeroDeEstudiante);
     $pdoSt-> bindParam(3,$FechaDeNacimiento);
     $pdoSt-> bindParam(4,$CorreoElectronico);
-    $pdoSt->execute();
+    $pdoSt-> execute();
 ?>

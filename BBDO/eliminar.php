@@ -1,7 +1,9 @@
 <?php 
    require('con.php');
    require('alumno.php');
+   $id = $_GET['ID'];
 
-   $registros = $pdo->exec('DELETE FROM alumno
-                           WHERE Nombre="Paco"');
+   $registros = $pdo->prepare('DELETE FROM alumno WHERE ID= ?');
+   $registros->bindParam(1,$id);
+   $registros->execute();
 ?>
