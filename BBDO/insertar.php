@@ -12,4 +12,5 @@
     $pdoSt-> bindParam(3,$FechaDeNacimiento);
     $pdoSt-> bindParam(4,$CorreoElectronico);
     $pdoSt-> execute();
+    echo "Se ha insertado 1 registro";
 ?>

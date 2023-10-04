@@ -9,4 +9,6 @@
     $registros->bindParam(2,$id);
 
     $registros->execute();
+    echo "Se ha actualizado 1 registro";
+    
 ?>
