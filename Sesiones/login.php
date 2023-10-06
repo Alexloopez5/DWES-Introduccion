@@ -1,5 +1,6 @@
 <?php 
     require('con.php');
+    session_start();
     function filtrado($datos){
         $datos = trim($datos); // Elimina espacios antes y después de los datos
         $datos = stripslashes($datos); // Elimina backslashes 
@@ -18,17 +19,19 @@
         }
 
         if(empty($errores)){
-            $username = filtrado($_POST['username']);
-            $password = filtrado($_POST['password']);
-            $resultado = $pdo -> prepare('SELECT ID FROM users WHERE username = ? AND password = ?');
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $resultado = $pdo -> prepare('SELECT username FROM users WHERE username = ? AND password = ?');
             $resultado -> bindParam(1,$username);
             $resultado -> bindParam(2,$password);
             $resultado -> execute();
-            while($registro = $resultado -> fetch()){
-                echo "ID: ".$registro['ID']."<br>";
+            $registro = $resultado -> fetch();
+            if($registro){
+                $_SESSION["username"] = $registro["username"];
+                header("location: privada.php");
+            }else{
+                echo "Ese usuario o contraseña no son válidos";
             }
-            echo "Username: " . filtrado($_POST['username']) . "<br>";
-            echo "Password: " . filtrado($_POST['password']) . "<br>";
         }
         if(isset($errores)){
             echo "<ul>";
@@ -39,3 +42,20 @@
         }
     }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <form action="login.php" method="post">
+        Username: <input type="text" name="username"><br>
+        Contraseña: <input type="password" name="password"><br>
+        <input type="submit" name="submit" value="Acceder"><br>
+    </form>
+    <p>¿Todavia no eres miembro? <a href="registro.php">Regístrate</a></p>
+</body>
+</html>
